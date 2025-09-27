@@ -4,7 +4,7 @@ const {generateToken}=require('../middleware/utils');
 
 const router=express.Router();
 
-router.post('/login',async(requestAnimationFrame,res)=>{
+router.post('/login',async(req,res)=>{
         const {email,password}=requestAnimationFrame.body;
         const userFound=await user.findOne({email});
         if(userFound &&(await userFound.comparePassword(passwword))){
@@ -19,7 +19,7 @@ router.post('/login',async(requestAnimationFrame,res)=>{
             res.status(401).json({message:"invalid email or password"});
         }
     });
-    
+
 module.exports=router;
 
 

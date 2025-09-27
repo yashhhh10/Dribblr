@@ -1,9 +1,9 @@
 const express= require('express');
 const Team = require('../models/team');
 const League = require('../models/league');
-const { protect, authorizeRoles } = require('../middleware/authMiddleware');
+const { protect, authorizeRoles } = require('../middleware/auth.js');
 
-const router = express.router();
+const router = express.Router();
 
 router.post('/add',protect, authorizeRoles('admin'),async(req,res)=>{
     const{leagueName, country ,seasons}=req.body;
@@ -19,7 +19,7 @@ router.post('/add',protect, authorizeRoles('admin'),async(req,res)=>{
 });
 router.get('/',async(req,res)=>{
     try{
-        const leagues=await league.find();
+        const leagues=await League.find();
         res.json(leagues);
     }catch(error){
         console.error(error);
