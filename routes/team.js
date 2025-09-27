@@ -1,10 +1,11 @@
 const express= require('express');
 const Team= require('../models/team');
 const League= require('../models/league');
+const { protect, authorizeRoles } = require('../middleware/authMiddleware');
 
 const router= express.Router();
 
-router.post('/add',async(req,res)=>{
+router.post('/add',protect, authorizeRoles("sdmin"), async(req,res)=>{
     const {name, league, shortname, stadium, coach, founded}= req.body;
     try{
         const userLeague= await League.findById(league);
